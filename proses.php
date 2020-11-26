@@ -18,6 +18,25 @@ if ($_GET["act"] == "tambah_item") {
     } else {
         echo 'gagal';
     }
+} elseif ($_GET["act"] == "tambah_warehouse") {
+    $name = $_POST["name"];
+    $type = $_POST["type"];
+    $capacity = $_POST["capacity"];   
+    $address = $_POST["address"];
+
+    $data = [
+        "name" => $name,
+        "address" => $address,
+        "capacity" => $capacity,
+        "id_typewarehouse" => $type
+    ];
+
+    if ($db->insert("m_warehouse", $data) > 0) {
+        $_SESSION["flash"] = "Di Tambah";
+        header("Location: ./?p=warehouse");
+    } else {
+        echo 'gagal';
+    }
 } elseif ($_GET["act"] == "hapus_item") {
     $id_item = $_GET["id"];
     $data = [
